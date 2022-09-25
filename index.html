@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Decodificador de Textos</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="titulo">
+      <h1>CÓDIGO SECRETO</h1>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="box">
+          <label for="letrasminusculas"
+            >Apenas letras minúsculas, sem acento</label
+          >
+          <input
+            id="encrypt-message"
+            class="text-input"
+            type="text"
+            placeholder="digite seu texto"
+            required
+          />
+          <div>
+            <button class="btn" onclick="encrypt()">Criptografar</button>
+            <button class="btn" onclick="decrypt()">Descriptografar</button>
+          </div>
+        </div>
+        <div class="box">
+          <label for="mensagemcriptografada"
+            ><h2>MENSAGEM CRIPTOGRAFADA:</h2>
+          </label>
+          <input id="input-message" class="text-input" type="text" required />
+          <button class="btn2" onclick="copy()">Copiar</button>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>&copy; Lucas dos Santos - 2022</p>
+    </footer>
+  </body>
+</html>
+
+<script>
+  function encrypt() {
+    const encryptMessage = document.querySelector('#encrypt-message')
+    let newvalue = encryptMessage.value.split('').map(letter => {
+      if (letter == 'e') return 'enter'
+      if (letter == 'a') return 'ai'
+      if (letter == 'i') return 'imes'
+      if (letter == 'o') return 'ober'
+      if (letter == 'u') return 'ufat'
+      return letter
+    })
+    const inputMessage = document.querySelector('#input-message')
+    inputMessage.value = newvalue.join('')
+    console.log('newvalue', newvalue)
+  }
+
+  function decrypt() {
+    const encryptMessage = document.querySelector('#encrypt-message')
+    let encryptMessagevalue = encryptMessage.value
+    encryptMessagevalue = encryptMessagevalue.replace(/enter/g, 'e')
+    encryptMessagevalue = encryptMessagevalue.replace(/ai/g, 'a')
+    encryptMessagevalue = encryptMessagevalue.replace(/imes/g, 'i')
+    encryptMessagevalue = encryptMessagevalue.replace(/ober/g, 'o')
+    encryptMessagevalue = encryptMessagevalue.replace(/ufat/g, 'u')
+    const inputMessage = document.querySelector('#input-message')
+    inputMessage.value = encryptMessagevalue
+  }
+
+  function copy() {
+    var inputMessage = document.getElementById('input-message')
+    inputMessage.select()
+    document.execCommand('copy')
+  }
+</script>
